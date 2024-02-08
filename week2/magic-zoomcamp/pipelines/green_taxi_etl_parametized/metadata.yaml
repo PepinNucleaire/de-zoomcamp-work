@@ -8,13 +8,13 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: python
-  name: load_green_taxi_data_param
+  name: load_green_taxy_from_nycdata
   retry_config: null
   status: updated
   timeout: null
   type: data_loader
   upstream_blocks: []
-  uuid: load_green_taxi_data_param
+  uuid: load_green_taxy_from_nycdata
 - all_upstream_blocks_executed: false
   color: null
   configuration: {}
@@ -26,11 +26,11 @@ blocks:
   language: python
   name: clean_columns_green_taxi
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: transformer
   upstream_blocks:
-  - load_green_taxi_data_param
+  - load_green_taxy_from_nycdata
   uuid: clean_columns_green_taxi
 - all_upstream_blocks_executed: false
   color: null
@@ -48,22 +48,6 @@ blocks:
   upstream_blocks:
   - clean_columns_green_taxi
   uuid: green_data_taxi_to_gcs
-- all_upstream_blocks_executed: true
-  color: null
-  configuration: {}
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: vivid frost
-  replicated_block: green_data_taxi_to_gcs
-  retry_config: null
-  status: not_executed
-  timeout: null
-  type: data_exporter
-  upstream_blocks: []
-  uuid: vivid_frost
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -85,7 +69,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2024-02-05T21:34:30+00:00'
+updated_at: '2024-02-08T22:41:35+00:00'
 uuid: green_taxi_etl_parametized
 variables_dir: /home/src/mage_data/magic-zoomcamp
 widgets: []

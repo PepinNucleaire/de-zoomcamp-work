@@ -13,7 +13,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/src/personal-gcp.json/eigh
 bucket_name = 'eighth-veld-411323-bucket'
 project_id = 'eighth-veld-411323-8a0d542a0598'
 
-table_name= "nyc_green_taxi_data"
+table_name= "nyc_green_taxi_data_file"
 
 root_path = f'{bucket_name}/{table_name}'
 
@@ -26,7 +26,7 @@ def export_data(data, *args, **kwargs):
     pq.write_to_dataset(
         table,
         root_path=root_path,
-        partition_cols=["lpep_pickup_date"],
+        # partition_cols=["lpep_pickup_date"],
         filesystem=gcs
     )
 

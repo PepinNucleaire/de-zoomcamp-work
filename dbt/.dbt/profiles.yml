@@ -1,4 +1,4 @@
-taxi_rides_ny:
+bq-de-zoomcamp:
   outputs:
     dev:
       dataset: taxi_trips_all

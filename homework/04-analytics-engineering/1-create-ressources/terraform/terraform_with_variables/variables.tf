@@ -1,6 +1,6 @@
 variable "credentials" {
   description = "My Credentials"
-  default     = "~/Documents/secrets/personal-gcp.json/eighth-veld-411323-8a0d542a0598.json"
+  default     = "./keys/eighth-veld-411323-8a0d542a0598.json"
   #ex: if you have a directory where this file is called keys with your service account json file
   #saved there as my-creds.json you could use default = "./keys/my-creds.json"
 }
@@ -26,7 +26,7 @@ variable "location" {
 variable "bq_dataset_name" {
   description = "My BigQuery Dataset Name"
   #Update the below to what you want your dataset to be called
-  default     = "taxi_trips_all"
+  default     = "eighth-veld-411323-ny-dataset"
 }
 
 variable "gcs_bucket_name" {

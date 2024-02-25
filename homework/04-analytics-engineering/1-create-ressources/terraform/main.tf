@@ -36,3 +36,8 @@ resource "google_bigquery_dataset" "taxi_trips_all" {
   dataset_id = var.bq_dataset_name
   location   = var.location
 }
+
+resource "google_bigquery_dataset" "taxi_rides_ny" {
+  dataset_id = "taxi_rides_ny"
+  location   = var.location
+}

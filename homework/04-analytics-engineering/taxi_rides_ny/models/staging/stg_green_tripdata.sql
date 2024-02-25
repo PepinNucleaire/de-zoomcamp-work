@@ -7,8 +7,8 @@ WITH tripdata AS (
     SELECT
         *,
         ROW_NUMBER() over(
-            PARTITION BY vendor_id,
-            pickup_datetime
+            PARTITION BY VendorID,
+            lpep_pickup_datetime
         ) AS rn
     FROM
         {{ source(
@@ -16,27 +16,27 @@ WITH tripdata AS (
             'green_tripdata'
         ) }}
     WHERE
-        vendor_id IS NOT NULL
+        VendorID IS NOT NULL
 )
 SELECT
     -- identifiers
-    {{ dbt_utils.generate_surrogate_key(['vendor_id', 'pickup_datetime']) }} AS trip_id,
-    {{ dbt.safe_cast("vendor_id", api.Column.translate_type("integer")) }} AS vendor_id,
-    {{ dbt.safe_cast("rate_code", api.Column.translate_type("integer")) }} AS rate_code,
+    {{ dbt_utils.generate_surrogate_key(['VendorID', 'lpep_pickup_datetime']) }} AS trip_id,
+    {{ dbt.safe_cast("VendorID", api.Column.translate_type("integer")) }} AS vendor_id,
+    {{ dbt.safe_cast("RatecodeID", api.Column.translate_type("integer")) }} AS rate_code,
     {{ dbt.safe_cast(
-        "pickup_location_id",
+        "PULocationID",
         api.Column.translate_type("integer")
     ) }} AS pickup_location_id,
     {{ dbt.safe_cast(
-        "dropoff_location_id",
+        "DOLocationID",
         api.Column.translate_type("integer")
     ) }} AS dropoff_location_id,
     -- timestamps
     CAST(
-        pickup_datetime AS TIMESTAMP
+        lpep_pickup_datetime AS TIMESTAMP
     ) AS pickup_datetime,
     CAST(
-        dropoff_datetime AS TIMESTAMP
+        lpep_dropoff_datetime AS TIMESTAMP
     ) AS dropoff_datetime,
     -- trip info
     store_and_fwd_flag,
@@ -68,7 +68,7 @@ SELECT
         ehail_fee AS numeric
     ) AS ehail_fee,
     CAST(
-        imp_surcharge AS numeric
+        improvement_surcharge AS numeric
     ) AS improvement_surcharge,
     CAST(
         total_amount AS numeric
